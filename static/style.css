@@ -84,6 +84,7 @@ input[type=color] { width: 32px; height: 32px; padding: 0; border: none; backgro
 }
 .stage.dark { background: radial-gradient(circle at 50% 40%, #2a2f3a, #12141a); }
 .stage canvas, .stage img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#output:not([src]) { visibility: hidden; }  /* no broken-image icon before the first preview */
 .stage.dragover { outline: 3px dashed var(--accent); outline-offset: -6px; }
 #sketch-stage { cursor: none; touch-action: none; }
 #stroke { pointer-events: none; }

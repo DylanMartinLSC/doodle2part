@@ -288,6 +288,7 @@ function sendFrame() {
 // ---- 3D --------------------------------------------------------------------
 
 const viewer = createViewer($("viewer"));
+window.viewer = viewer;  // for scripted demos
 let making = false;
 let wireframe = false;
 
@@ -318,6 +319,7 @@ async function make3d() {
   making = true;
   $("make3d").disabled = true;
   $("loading").hidden = false;
+  $("viewer-empty").hidden = true;
   const started = performance.now();
   const tick = setInterval(() => {
     $("loading-text").textContent = `Building 3D model… ${((performance.now() - started) / 1000).toFixed(0)}s`;
@@ -339,6 +341,7 @@ async function make3d() {
   } catch (err) {
     status.textContent = "3D failed (see console)";
     console.error(err);
+    $("viewer-empty").hidden = !$("download").hidden;  // bring the hint back if nothing is shown yet
   } finally {
     clearInterval(tick);
     $("loading").hidden = true;

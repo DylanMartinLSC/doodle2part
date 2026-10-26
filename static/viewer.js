@@ -11,7 +11,9 @@ export function createViewer(container) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
-  camera.position.set(1.6, 1.0, 2.2);
+  // TRELLIS models face +Z, so start from a front three-quarter view.
+  const HOME = new THREE.Vector3(1.1, 0.8, 2.6);
+  camera.position.copy(HOME);
   scene.add(new THREE.HemisphereLight(0xffffff, 0x404050, 2.2));
   const key = new THREE.DirectionalLight(0xffffff, 1.6);
   key.position.set(2, 3, 2);
@@ -78,7 +80,10 @@ export function createViewer(container) {
     wrapper.scale.setScalar(2 / size);
     scene.add(wrapper);
     model = wrapper;
+    // The turntable may have spun the empty scene while the model was building; start each model facing front.
     controls.target.set(0, 0, 0);
+    camera.position.copy(HOME);
+    controls.update();
     return { faces: Math.round(faces) };
   }
 
@@ -86,6 +91,13 @@ export function createViewer(container) {
     load,
     setWireframe(on) { wireframe = on; forEachMaterial((m) => (m.wireframe = on)); },
     setSpin(on) { controls.autoRotate = on; },
+    // Place the camera at `radians` around the vertical axis from the home view (used by scripts/record_demo.py).
+    orbitTo(radians) {
+      controls.autoRotate = false;
+      camera.position.copy(HOME).applyAxisAngle(new THREE.Vector3(0, 1, 0), radians);
+      camera.lookAt(controls.target);
+      controls.update();
+    },
     onSpinChange(fn) { onSpinChange = fn; },
   };
 }
