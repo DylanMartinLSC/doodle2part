@@ -1,0 +1,36 @@
+# Python 3.11, native Windows, CUDA 12.4 wheels. These pins are known to work together
+# (newer diffusers needs huggingface_hub>=1, which transformers 4.49 rejects).
+#
+#   uv venv --python 3.11 .venv
+#   uv pip install --python .venv/Scripts/python.exe torch==2.5.1 torchvision==0.20.1 xformers==0.0.28.post3 --index-url https://download.pytorch.org/whl/cu124
+#   uv pip install --python .venv/Scripts/python.exe -r requirements.txt
+#   git clone --recurse-submodules https://github.com/microsoft/TRELLIS.git third_party/TRELLIS
+
+# Server
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+pillow==12.3.0
+
+# Live preview (SD-Turbo)
+diffusers==0.35.2
+transformers==4.49.0
+huggingface_hub==0.36.2
+hf_xet==1.7.0
+accelerate==1.15.0
+safetensors==0.8.0
+
+# TRELLIS
+spconv-cu124==2.3.8
+utils3d @ git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8
+easydict==1.13
+rembg==2.0.86
+onnxruntime==1.31.0
+open3d==0.20.0
+trimesh==5.2.0
+scipy==1.17.1
+imageio==2.38.1
+opencv-python-headless
+xatlas==0.0.11
+pyvista==0.49.1
+pymeshfix==0.18.1
+igraph==1.0.0

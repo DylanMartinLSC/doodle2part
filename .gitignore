@@ -4,3 +4,5 @@ __pycache__/
 m0/out/
 third_party/
 .venv-cad/
+outputs/
+*.log

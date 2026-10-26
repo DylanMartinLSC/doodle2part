@@ -1,0 +1,150 @@
+:root {
+  --bg: #0f1115;
+  --panel: #181b22;
+  --line: #2a2f3a;
+  --text: #e6e8ee;
+  --muted: #8a91a0;
+  --accent: #6d8cff;
+  --gap: 20px;
+  /* Three square stages side by side, capped so they fit on screen without scrolling. */
+  --stage: max(240px, min(calc((100vw - 4 * var(--gap)) / 3), calc(100vh - 300px)));
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.4 system-ui, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px var(--gap);
+  border-bottom: 1px solid var(--line);
+}
+
+h1 { font-size: 18px; margin: 0; white-space: nowrap; }
+
+#prompt, #seed {
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+}
+#prompt { flex: 1; min-width: 0; padding: 10px 12px; font-size: 15px; }
+#seed { width: 110px; padding: 5px 8px; }
+
+.status { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 110px; text-align: right; white-space: nowrap; }
+
+main {
+  display: flex;
+  justify-content: center;
+  gap: var(--gap);
+  padding: 12px var(--gap);
+}
+
+.pane { display: flex; flex-direction: column; gap: 8px; width: var(--stage); }
+.pane-title { font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }
+
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 32px; }
+.toolbar label { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+.toolbar input[type=range] { width: 80px; }
+.hint { color: var(--muted); font-size: 12px; }
+
+button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+button:hover { border-color: var(--muted); }
+button:disabled { opacity: 0.5; cursor: default; }
+button.active { border-color: var(--accent); color: var(--accent); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+#swatches { display: flex; flex-wrap: wrap; gap: 4px; }
+.swatch { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--line); cursor: pointer; }
+
+input[type=color] { width: 32px; height: 32px; padding: 0; border: none; background: none; cursor: pointer; }
+
+.stage {
+  position: relative;
+  width: var(--stage);
+  height: var(--stage);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.stage.dark { background: radial-gradient(circle at 50% 40%, #2a2f3a, #12141a); }
+.stage canvas, .stage img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage.dragover { outline: 3px dashed var(--accent); outline-offset: -6px; }
+#sketch-stage { cursor: none; touch-action: none; }
+#stroke { pointer-events: none; }
+#viewer canvas { touch-action: none; }
+
+#cursor {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  box-shadow: 0 0 0 1px #000;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+}
+.empty[hidden] { display: none; }
+
+#loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(15, 17, 21, 0.7);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+#loading[hidden] { display: none; }
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+footer { padding: 0 var(--gap) 16px; }
+.history { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.history:empty::before { content: "3D models you make appear here."; color: var(--muted); font-size: 12px; }
+.thumb { flex: none; cursor: pointer; }
+.thumb img { width: 72px; height: 72px; border-radius: 6px; border: 1px solid var(--line); display: block; }
+.thumb.active img { border-color: var(--accent); }
+
+/* Narrow windows: stack the panes. */
+@media (max-width: 900px) {
+  :root { --stage: min(calc(100vw - 32px), 560px); --gap: 16px; }
+  header { flex-wrap: wrap; }
+  #prompt { flex-basis: 100%; order: 3; }
+  main { flex-direction: column; align-items: center; }
+}

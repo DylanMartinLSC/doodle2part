@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "doodle2part-mock", "runtimeExecutable": ".venv/Scripts/python.exe", "runtimeArgs": ["server.py", "--mock"], "port": 7861 },
+    { "name": "doodle2part", "runtimeExecutable": ".venv/Scripts/python.exe", "runtimeArgs": ["server.py"], "port": 7861 }
+  ]
+}

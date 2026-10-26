@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doodle2Part</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script type="importmap">{ "imports": { "three": "/static/vendor/three.module.js" } }</script>
+</head>
+<body>
+  <header>
+    <h1>Doodle2Part</h1>
+    <input id="prompt" type="text" placeholder="What are you drawing?" value="a cute toy robot">
+    <span id="status" class="status">connecting…</span>
+  </header>
+
+  <main>
+    <section class="pane">
+      <div class="pane-title">1 · Sketch</div>
+      <div class="toolbar">
+        <input id="color" type="color" value="#1e3a8a" title="Brush color">
+        <div id="swatches"></div>
+      </div>
+      <div class="stage" id="sketch-stage">
+        <canvas id="sketch" width="1024" height="1024"></canvas>
+        <canvas id="stroke" width="1024" height="1024"></canvas>
+        <div id="cursor"></div>
+      </div>
+      <div class="toolbar">
+        <button id="brush" class="active" title="Brush (B)">Brush</button>
+        <button id="eraser" title="Eraser (E)">Eraser</button>
+        <label title="Brush size ([ and ])">Size <input id="size" type="range" min="2" max="120" value="14"></label>
+        <button id="undo" title="Undo (Ctrl+Z)">Undo</button>
+        <button id="redo" title="Redo (Ctrl+Shift+Z)">Redo</button>
+        <button id="clear">Clear</button>
+      </div>
+    </section>
+
+    <section class="pane">
+      <div class="pane-title">2 · Preview</div>
+      <div class="toolbar">
+        <label title="How far the preview may stray from your sketch">Creativity
+          <input id="strength" type="range" min="0.2" max="0.95" step="0.05" value="0.75"></label>
+        <button id="reseed" title="New random seed (same seed + same sketch = same result)">Reroll</button>
+      </div>
+      <div class="stage">
+        <img id="output" width="512" height="512" alt="Live preview">
+      </div>
+      <div class="toolbar">
+        <button id="make3d" class="primary" title="Turn this preview into a 3D model (Ctrl+Enter)">Make 3D →</button>
+        <label title="Same seed + same sketch = same result">Seed
+          <input id="seed" type="number" min="0" max="2147483647"></label>
+      </div>
+    </section>
+
+    <section class="pane">
+      <div class="pane-title">3 · Model</div>
+      <div class="toolbar">
+        <button id="wireframe" title="Show triangle edges">Wireframe</button>
+        <button id="spin" class="active" title="Turntable rotation">Spin</button>
+        <a id="download" download="doodle2part.glb" hidden><button>Download .glb</button></a>
+      </div>
+      <div class="stage dark" id="viewer">
+        <div id="viewer-empty" class="empty"><span>Draw something, then press <b>Make 3D</b></span></div>
+        <div id="loading" hidden><div class="spinner"></div><span id="loading-text"></span></div>
+      </div>
+      <div class="toolbar">
+        <span id="mesh-info" class="hint">Drag to orbit · scroll to zoom · right-drag to pan</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div id="history" class="history" title="Models made this session; click to view"></div>
+  </footer>
+
+  <script type="module" src="/static/app.js"></script>
+</body>
+</html>
