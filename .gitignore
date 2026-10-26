@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+m0/out/
+third_party/
+.venv-cad/
