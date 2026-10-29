@@ -15,7 +15,7 @@ from pathlib import Path
 import numpy as np
 import trimesh
 
-TRELLIS_DIR = Path(__file__).parent / "third_party" / "TRELLIS"
+TRELLIS_DIR = Path(os.environ.get("DOODLE2PART_TRELLIS", Path(__file__).parent / "third_party" / "TRELLIS"))
 TRELLIS_REPO = "microsoft/TRELLIS-image-large"
 # TRELLIS is Z-up; glTF is Y-up. (x, y, z) -> (x, z, -y)
 Z_UP_TO_Y_UP = np.array([[1, 0, 0], [0, 0, -1], [0, 1, 0]], dtype=np.float32)

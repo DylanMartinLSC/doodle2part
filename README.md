@@ -1,5 +1,17 @@
 # Doodle2Part
 
+Draw a doodle, see a live AI preview, and turn it into a colored 3D mesh.
+
+<!-- TODO: Record the real app using media/GIF_SHOTLIST.md and drop the file at media/demo.gif. -->
+![Doodle2Part demo](media/demo.gif)
+
+[![Download for Windows](https://img.shields.io/badge/Download_for_Windows-download-238636)](https://github.com/DylanMartinLSC/doodle2part/releases/latest/download/doodle2part-windows.zip)
+
+Windows builds are unsigned: if SmartScreen appears, choose **More info → Run anyway**.
+
+Extract the whole ZIP, then run the EXE. First run installs Python/CUDA packages and downloads models with progress; allow internet access, substantial free disk space and a compatible NVIDIA GPU/driver. Keep the launcher open while using the local browser UI. See [portable setup](docs/PORTABLE.md).
+
+
 **Draw a doodle, get a 3D model.** A live AI preview turns your sketch into a clean product shot as you draw. One click turns that into a colored 3D mesh you can rotate in the browser and download as `.glb`.
 
 Everything runs locally on one consumer GPU. No API keys, no cloud, and your sketches never leave your machine.

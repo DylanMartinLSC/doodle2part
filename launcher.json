@@ -1,0 +1,17 @@
+{
+  "id": "Doodle2Part",
+  "name": "Doodle2Part",
+  "port": 7861,
+  "trellis": "193e0502b5cb3eb5997ec457d5340e95d09b158e",
+  "torch": [
+    "torch==2.5.1",
+    "torchvision==0.20.1",
+    "xformers==0.0.28.post3"
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu124",
+  "models": [
+    "microsoft/TRELLIS-image-large",
+    "stabilityai/sd-turbo",
+    "madebyollin/taesd"
+  ]
+}

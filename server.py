@@ -12,6 +12,7 @@ import argparse
 import asyncio
 import base64
 import io
+import os
 import time
 from pathlib import Path
 
@@ -25,7 +26,7 @@ from preview import OBJECT_HINT, SIZE
 
 ROOT = Path(__file__).parent
 STATIC = ROOT / "static"
-OUTPUTS = ROOT / "outputs"
+OUTPUTS = Path(os.environ.get("DOODLE2PART_OUTPUTS", ROOT / "outputs"))
 
 
 def decode_image(data_url):
