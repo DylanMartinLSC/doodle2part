@@ -2,8 +2,9 @@
 
 Draw a doodle, see a live AI preview, and turn it into a colored 3D mesh.
 
-<!-- TODO: Record the real app using media/GIF_SHOTLIST.md and drop the file at media/demo.gif. -->
 ![Doodle2Part demo](media/demo.gif)
+
+<sub>Actual RTX 3090 run; the 18.109-second 3D generation wait is omitted. [Recording details](media/DEMO.md).</sub>
 
 [![Download for Windows](https://img.shields.io/badge/Download_for_Windows-download-238636)](https://github.com/DylanMartinLSC/doodle2part/releases/latest/download/doodle2part-windows.zip)
 
